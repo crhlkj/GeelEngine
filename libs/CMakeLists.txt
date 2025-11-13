@@ -1,5 +1,5 @@
 # Опция: использовать локальную, предварительно собранную GLFW
-option(USE_LOCAL_GLFW "Использовать локальную библиотеку GLFW (предварительно собранную в libs/glfw/build)" OFF)
+option(USE_LOCAL_GLFW "Использовать локальную библиотеку GLFW" OFF)
 
 # Опция: собирать GLFW статически (только для USE_LOCAL_GLFW)
 option(BUILD_GLFW_SHARED "Собирать GLFW как динамическую библиотеку" OFF)
@@ -39,7 +39,7 @@ endif()
 # --- 
 
 # Опция: использовать локальную, предварительно собранную ImGui
-option(USE_LOCAL_IMGUI "Используйте локальную, предварительно созданную библиотеку ImGui вместо того, чтобы извлекать ее." OFF)
+option(USE_LOCAL_IMGUI "Используйте локальную библиотеки ImGui" OFF)
 
 # Опция: собирать ImGui статически (только для USE_LOCAL_IMGUI)
 option(BUILD_IMGUI_SHARED "Собирать ImGui как как общую библиотеку." OFF)
@@ -77,18 +77,6 @@ if(USE_LOCAL_IMGUI)
         PRIVATE
             ${GLFW_SOURCE_DIR}/include
     )
-else()
-    # Автоматическая загрузка и сборка ImGui через FetchContent
-    include(FetchContent)
-
-    FetchContent_Declare(
-        imgui
-        GIT_REPOSITORY https://github.com/ocornut/imgui.git
-        GIT_TAG master
-        GIT_SHALLOW    TRUE
-    )
-
-    FetchContent_MakeAvailable(imgui)
 endif()
 
 # Опция: собирать GLAD  статическической
