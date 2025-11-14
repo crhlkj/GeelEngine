@@ -20,9 +20,9 @@ int main(void)
             glfwPollEvents();
         }
     }
-    catch (const std::exception &e)
+    catch (const std::exception &error)
     {
-        std::cerr << "Error: " << e.what() << '\n';
+        std::cerr << "Error: " << error.what() << '\n';
         return -1;
     }
 
