@@ -4,14 +4,19 @@
 #include <iostream>
 #include <string>
 #include <memory>
-#include <format>
 #include <stdexcept>
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
-using glfwWindowDeleter = std::unique_ptr<GLFWwindow, decltype([](GLFWwindow *window)
-                                                                 { glfwDestroyWindow(window); })>;
+struct glfwWindowDeleter
+{
+    void operator()(GLFWwindow *window) const
+    {
+        if (window)
+            glfwDestroyWindow(window);
+    }
+};
 
 class Window
 {

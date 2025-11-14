@@ -4,7 +4,7 @@
 #include "../../libs/stb_image.h"
 
 Window::Window(std::size_t width, std::size_t height, std::string title)
-    : width(width), height(height), window(nullptr)
+    : width_(width), height_(height), window_(nullptr)
 {
     if (!glfwInit())
     {
@@ -21,8 +21,8 @@ Window::Window(std::size_t width, std::size_t height, std::string title)
     window_ = std::unique_ptr<GLFWwindow, glfwWindowDeleter>(
         glfwCreateWindow(width_, height_, title.data(), nullptr, nullptr));
 
-    if (!window_) {
-        glfwTerminate();
+    if (!window_)
+    {
         throw std::runtime_error("Failed to create GLFW window");
     }
 
@@ -54,19 +54,20 @@ auto Window::setWindowIcons(std::string pathFiles) const
 
         glfwSetWindowIcon(window_.get(), 1, images);
 
-        std::cout << std::format("Icon loaded successfully: {} ({}x{})\n", pathFiles, width, height);
+        std::cout << "Icon loaded successfully: " << pathFiles << " " << width << "x" << height << std::endl;
     }
     else
     {
-        throw std::runtime_error(std::format("Failed to load icon: {}", pathFiles));
+        throw std::runtime_error("Failed to load icon: " + pathFiles);
     }
 }
 
-bool Window::gladInit() const {
+bool Window::gladInit() const
+{
     return gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
 }
 
 bool Window::shouldClose() const
 {
-    return glfwWindowShouldClose(window.get());
+    return glfwWindowShouldClose(window_.get());
 }
