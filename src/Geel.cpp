@@ -6,7 +6,6 @@ int main(void)
     try
     {
         auto window = std::make_unique<Window>(1280, 720, "Geel Engine");
-        
         if (!window->gladInit())
         {
             throw std::runtime_error("Failed to initialize GLAD");
@@ -21,9 +20,9 @@ int main(void)
             glfwPollEvents();
         }
     }
-    catch (const std::exception &e)
+    catch (const std::exception &error)
     {
-        std::cerr << "Error: " << e.what() << '\n';
+        std::cerr << "Error: " << error.what() << '\n';
         return -1;
     }
 
