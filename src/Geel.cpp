@@ -6,6 +6,8 @@ int main(void)
     try
     {
         auto window = std::make_unique<Window>(1280, 720, "Geel Engine");
+        window->setWindowIcon("");
+
         if (!window->gladInit())
         {
             throw std::runtime_error("Failed to initialize GLAD");
